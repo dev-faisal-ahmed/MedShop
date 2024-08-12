@@ -20,7 +20,7 @@ export const PassWordInput = forwardRef<HTMLInputElement, TProps>(
         </label>
         <div
           className={twMerge(
-            'flex w-full items-center rounded-md border p-2 outline-none focus-within:ring-1 focus-within:ring-emerald-600',
+            'focus-within:ring-primary flex w-full items-center rounded-md border p-2 outline-none focus-within:ring-1',
             className,
           )}
         >
@@ -42,4 +42,5 @@ export const PassWordInput = forwardRef<HTMLInputElement, TProps>(
     );
   },
 );
+
 PassWordInput.displayName = 'Input';

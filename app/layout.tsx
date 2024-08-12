@@ -14,7 +14,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='en'>
       <body
-        className={`${font.className} flex min-h-screen flex-col bg-emerald-50`}
+        className={`${font.className} bg-primary-50 flex min-h-screen flex-col`}
       >
         {children}
       </body>

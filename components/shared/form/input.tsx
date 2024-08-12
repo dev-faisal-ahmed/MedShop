@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, TProps>(
         </label>
         <input
           className={twMerge(
-            'w-full rounded-md border p-2 outline-none focus:ring-1 focus:ring-emerald-600',
+            'focus:ring-primary w-full rounded-md border p-2 outline-none focus:ring-1',
             className,
           )}
           ref={ref}
