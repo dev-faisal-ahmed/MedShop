@@ -1,14 +1,14 @@
 'use client';
 
-import { useRegister } from './use.register';
 import { IoIosArrowBack } from 'react-icons/io';
-import { Button } from '@/components/ui/button';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/shared/form/input';
 import { ImageInput } from '@/components/shared/form/image.input';
 import { PasswordInput } from '@/components/shared/form/password.input';
-import { errorFormatter } from '@/app/_helpers/error.formatter';
 import { Loader } from '@/components/ui/loader';
+import { useRegister } from './use.register';
+import { errorFormatter } from '@/helpers';
 
 export function RegisterForm() {
   const { states, handlers, form } = useRegister();
@@ -81,7 +81,9 @@ export function RegisterForm() {
                 ))}
               </div>
             )}
-            <Button className='mt-6'>Register</Button>
+            <Button disabled={loading} className='mt-6'>
+              Register
+            </Button>
           </>
         )}
       </form>

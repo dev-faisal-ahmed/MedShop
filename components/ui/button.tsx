@@ -10,8 +10,8 @@ export const Button = forwardRef<HTMLButtonElement, TProps>(
     return (
       <button
         className={twMerge(
-          'rounded-md px-3 py-2',
-          variant === 'primary' && 'hover:bg-primary-700 bg-primary text-white',
+          'rounded-md px-3 py-2 disabled:cursor-not-allowed disabled:bg-gray-400',
+          variant === 'primary' && 'bg-primary text-white hover:bg-primary-700',
           variant === 'secondary' && 'bg-primary-400 text-white',
           variant === 'outline' && 'border border-primary',
           className,

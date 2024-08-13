@@ -18,7 +18,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/helpers": ["./app/_helpers/index.ts"],
+      "@/data": ["./app/_data/index.ts"],
+      "@/actions": ["./app/_actions/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,12 +1,13 @@
+'use client';
+
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { uploadImage } from '@/app/_helpers/upload.image';
-import { registerAction } from '@/app/_actions/register.action';
-import { setVerificationToken } from '@/app/_helpers/token.helper';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { uploadImage, setVerificationToken } from '@/helpers';
+import { registerAction } from '@/actions';
 
 const registerSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),

@@ -1,6 +1,16 @@
-export function Loader() {
+import { twMerge } from 'tailwind-merge';
+
+type TProps = {
+  className?: string;
+};
+
+export function Loader({ className }: TProps) {
   return (
-    <div className='mx-auto w-fit' aria-label='Loading...' role='status'>
+    <div
+      className={twMerge('mx-auto w-fit', className)}
+      aria-label='Loading...'
+      role='status'
+    >
       <svg
         className='h-8 w-8 animate-spin stroke-primary'
         viewBox='0 0 256 256'
