@@ -1,17 +1,16 @@
 'use client';
 
-import {
-  decodeVerificationToken,
-  removeVerificationToken,
-  setVerificationToken,
-  getRemainingTime,
-  getVerificationToken,
-} from '@/helpers';
 import { z } from 'zod';
+import { getVerificationTokenAction } from '@/app/_utils/actions';
+import { verifyUserAction } from '@/app/_utils/actions';
+import { decodeVerificationToken } from '@/app/_utils/helpers';
+import { removeVerificationToken } from '@/app/_utils/helpers';
+import { setVerificationToken } from '@/app/_utils/helpers';
+import { getRemainingTime } from '@/app/_utils/helpers';
+import { getVerificationToken } from '@/app/_utils/helpers';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { getVerificationTokenAction, verifyUserAction } from '@/actions';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 

@@ -1,4 +1,4 @@
-import { apiUrl } from '../_data/api.url';
+import { apiUrl } from '../../_data/api.url';
 
 export const uploadImage = async (formData: FormData) => {
   const imageBBResponse = await fetch(apiUrl.imageBBUrl, {

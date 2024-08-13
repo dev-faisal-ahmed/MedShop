@@ -1,7 +1,7 @@
 'use server';
 
-import { apiUrl } from '@/data';
-import { fetchOption } from '@/helpers';
+import { apiUrl } from '@/app/_data';
+import { fetchOption } from '@/app/_utils/helpers';
 
 type TPayload = { code: string; verificationToken: string };
 

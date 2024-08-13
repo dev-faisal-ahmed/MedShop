@@ -4,7 +4,7 @@ import { ClientOnly } from '@/components/shared/client.only';
 import { Input } from '@/components/shared/form/input';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
-import { errorFormatter } from '@/helpers';
+import { errorFormatter } from '@/app/_utils/helpers';
 import { useVerification } from './use.verification';
 
 export function VerificationForm() {

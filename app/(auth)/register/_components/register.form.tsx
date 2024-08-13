@@ -8,7 +8,7 @@ import { ImageInput } from '@/components/shared/form/image.input';
 import { PasswordInput } from '@/components/shared/form/password.input';
 import { Loader } from '@/components/ui/loader';
 import { useRegister } from './use.register';
-import { errorFormatter } from '@/helpers';
+import { errorFormatter } from '@/app/_utils/helpers';
 
 export function RegisterForm() {
   const { states, handlers, form } = useRegister();

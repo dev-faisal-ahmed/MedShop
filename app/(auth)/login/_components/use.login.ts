@@ -1,7 +1,7 @@
 'use client';
 
-import { loginAction } from '@/actions';
-import { setAccessToken, setRefreshToken } from '@/helpers';
+import { loginAction } from '@/app/_utils/actions';
+import { setAccessToken, setRefreshToken } from '@/app/_utils/helpers';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

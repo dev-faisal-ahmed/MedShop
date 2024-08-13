@@ -1,5 +1,5 @@
-import { apiUrl } from '../_data/api.url';
-import { fetchOption } from '../_helpers/fetch.helper';
+import { apiUrl } from '@/app/_data';
+import { fetchOption } from '@/app/_utils/helpers';
 
 type TRegister = {
   name: string;

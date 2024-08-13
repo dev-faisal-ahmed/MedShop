@@ -5,7 +5,7 @@ import { PasswordInput } from '@/components/shared/form/password.input';
 import { Button } from '@/components/ui/button';
 import { useLogin } from './use.login';
 import { Loader } from '@/components/ui/loader';
-import { errorFormatter } from '@/app/_helpers';
+import { errorFormatter } from '@/app/_utils/helpers';
 
 export function LoginForm() {
   const { states, handlers, form } = useLogin();

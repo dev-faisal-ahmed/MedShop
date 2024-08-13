@@ -6,8 +6,8 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { uploadImage, setVerificationToken } from '@/helpers';
-import { registerAction } from '@/actions';
+import { uploadImage, setVerificationToken } from '@/app/_utils/helpers';
+import { registerAction } from '@/app/_utils/actions';
 
 const registerSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),

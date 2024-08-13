@@ -1,7 +1,7 @@
 'use server';
 
-import { apiUrl } from '@/data';
-import { fetchOption, tokenKeys } from '@/helpers';
+import { apiUrl } from '@/app/_data';
+import { fetchOption, tokenKeys } from '@/app/_utils/helpers';
 import { cookies } from 'next/headers';
 
 type TPayload = { email: string; password: string };

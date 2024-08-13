@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import './globals.css';
 import { Toaster } from 'sonner';
+import { ReduxProvider } from './_redux/provider';
 
 const font = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body
         className={`${font.className} flex min-h-screen flex-col bg-primary-50`}
       >
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
         <Toaster richColors duration={1500} />
       </body>
     </html>
