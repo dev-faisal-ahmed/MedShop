@@ -13,6 +13,7 @@ const config: Config = {
           DEFAULT: '#059669',
           50: '#ecfdf5',
           400: '#4ade80',
+          700: '#047857',
         },
       },
     },

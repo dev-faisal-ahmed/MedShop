@@ -1,25 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useRegister } from './use.register';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Button } from '@/components/ui/button';
 import { IoIosArrowForward } from 'react-icons/io';
 import { Input } from '@/components/shared/form/input';
 import { ImageInput } from '@/components/shared/form/image.input';
-import { PassWordInput } from '@/components/shared/form/password.input';
+import { PasswordInput } from '@/components/shared/form/password.input';
+import { errorFormatter } from '@/app/_helpers/error.formatter';
+import { Loader } from '@/components/ui/loader';
 
 export function RegisterForm() {
-  const [image, setImage] = useState<File[] | null>(null);
-  const [page, setPage] = useState(1);
+  const { states, handlers, form } = useRegister();
+  const { images, page, error, loading } = states;
+  const { setImage, setPage, onRegister } = handlers;
+  const { register, formState } = form;
 
   return (
     <>
-      <form className='mt-6 flex flex-col gap-3' action=''>
+      <form onSubmit={onRegister} className='mt-6 flex flex-col gap-3'>
         {/* Back Button */}
         {page === 2 && (
           <div
             onClick={() => setPage(1)}
-            className='bg-primary-400 flex w-fit cursor-pointer items-center gap-1 rounded-full py-1 pl-1 pr-3 font-semibold text-white'
+            className='flex w-fit cursor-pointer items-center gap-1 rounded-full bg-primary-400 py-1 pl-1 pr-3 font-semibold text-white'
           >
             <IoIosArrowBack size={18} />
             Go Back
@@ -27,17 +31,25 @@ export function RegisterForm() {
         )}
 
         {/* page 1 content */}
-
         {page === 1 && (
           <>
-            <Input label='Name' name='name' placeholder='Input Your Email' />
             <Input
+              {...register('name')}
+              label='Name'
+              placeholder='Input Your Email'
+              type='text'
+            />
+            <Input
+              {...register('email')}
               label='Email'
-              name='email'
+              placeholder='Input Your Email'
               type='email'
+            />
+            <PasswordInput
+              {...register('password')}
+              label='Password'
               placeholder='Input Your Email'
             />
-            <PassWordInput label='Password' placeholder='Input Your Password' />
           </>
         )}
 
@@ -45,12 +57,31 @@ export function RegisterForm() {
         {page === 2 && (
           <>
             <ImageInput
-              images={image}
+              images={images}
               setImages={setImage}
               id='user-image'
               label='Image'
             />
-            <Button className='mt-6'>Submit</Button>
+            {/* showing all errors */}
+            {error && (
+              <div className='rounded-md bg-red-100 p-1 text-xs text-red-500'>
+                {error}
+              </div>
+            )}
+
+            {/* loading */}
+            {loading && <Loader />}
+
+            {errorFormatter(formState.errors).length > 0 && (
+              <div className='flex flex-col gap-1 rounded-md bg-red-100 p-1 text-xs'>
+                {errorFormatter(formState.errors).map((err, index) => (
+                  <p className='text-red-500' key={index}>
+                    {err}
+                  </p>
+                ))}
+              </div>
+            )}
+            <Button className='mt-6'>Register</Button>
           </>
         )}
       </form>

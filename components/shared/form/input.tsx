@@ -6,21 +6,16 @@ type TProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const Input = forwardRef<HTMLInputElement, TProps>(
-  ({ className, type, name, label, ...props }, ref) => {
+  ({ className, label, ...props }, ref) => {
     return (
       <div className='flex flex-col gap-1 text-left'>
-        <label className='text-base font-semibold' htmlFor={name}>
-          {label}
-        </label>
+        <label className='text-base font-semibold'>{label}</label>
         <input
           className={twMerge(
-            'focus:ring-primary w-full rounded-md border p-2 outline-none focus:ring-1',
+            'flex w-full items-center rounded-md border p-2 outline-none focus-within:ring-1 focus-within:ring-primary',
             className,
           )}
           ref={ref}
-          id={name}
-          name={name}
-          type={type}
           {...props}
         />
       </div>
@@ -28,4 +23,4 @@ export const Input = forwardRef<HTMLInputElement, TProps>(
   },
 );
 
-Input.displayName = 'Input';
+Input.displayName;
