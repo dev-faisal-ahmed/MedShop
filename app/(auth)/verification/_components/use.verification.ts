@@ -5,12 +5,15 @@ import {
   removeVerificationToken,
   setVerificationToken,
   getRemainingTime,
+  getVerificationToken,
 } from '@/helpers';
 import { z } from 'zod';
+import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { getVerificationTokenAction } from '@/actions';
+import { getVerificationTokenAction, verifyUserAction } from '@/actions';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const verificationSchema = z.object({
   code: z
@@ -23,10 +26,14 @@ type TVerificationSchema = z.infer<typeof verificationSchema>;
 export const useVerification = () => {
   // vars
   const verificationData = decodeVerificationToken();
+
   // states
   const [time, setTime] = useState(getRemainingTime(verificationData?.exp));
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // others
+  const router = useRouter();
 
   // forms
   const verificationForm = useForm<TVerificationSchema>({
@@ -51,7 +58,23 @@ export const useVerification = () => {
 
   // handlers
   const onVerification = verificationForm.handleSubmit(async (formData) => {
-    console.log(formData);
+    try {
+      const code = formData.code;
+      const verificationToken = getVerificationToken();
+      if (!verificationToken) throw new Error('Failed to verify, try again!');
+
+      const response = await verifyUserAction({ code, verificationToken });
+      if (!response?.ok) throw new Error(response?.message);
+      toast.success(response?.message);
+
+      // removing verification token and redirecting user
+      removeVerificationToken();
+      router.push('/');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(true);
+    }
   });
 
   // resend verification code

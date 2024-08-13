@@ -4,11 +4,10 @@ import { ClientOnly } from '@/components/shared/client.only';
 import { Input } from '@/components/shared/form/input';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
-import { getVerificationToken, errorFormatter } from '@/helpers';
+import { errorFormatter } from '@/helpers';
 import { useVerification } from './use.verification';
 
 export function VerificationForm() {
-  const verificationToken = getVerificationToken();
   const { states, handlers, form } = useVerification();
   const { time, error, loading } = states;
   const { verificationForm } = form;
