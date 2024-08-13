@@ -13,7 +13,7 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <aside
       className={twMerge(
-        'sticky left-0 top-0 flex h-screen min-w-[250px] flex-col bg-white p-6',
+        'sticky left-0 top-0 flex h-screen min-w-[250px] flex-col border bg-white p-6 shadow',
         className,
       )}
     >

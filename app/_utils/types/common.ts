@@ -5,6 +5,14 @@ export type TMeta = {
   totalPage: number;
 };
 
+export type TServerResponse<TData> = {
+  ok: boolean;
+  message: string;
+  data?: TData;
+  meta?: TMeta;
+  error?: any;
+};
+
 export type TSuccessResponse = {
   message: string;
   data: any;

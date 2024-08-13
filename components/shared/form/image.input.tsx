@@ -39,7 +39,7 @@ export function ImageInput({ label, id, images, setImages }: TProps) {
 
   return (
     <div className='flex w-full flex-col gap-1 text-left'>
-      <label className='text-base font-semibold'>{label}</label>
+      <label className='font-semibold'>{label}</label>
       {images && images.length ? (
         <>
           <div className='relative h-52 overflow-hidden rounded-md'>
