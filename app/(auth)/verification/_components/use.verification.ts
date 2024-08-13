@@ -59,6 +59,9 @@ export const useVerification = () => {
   // handlers
   const onVerification = verificationForm.handleSubmit(async (formData) => {
     try {
+      setError('');
+      setLoading(true);
+
       const code = formData.code;
       const verificationToken = getVerificationToken();
       if (!verificationToken) throw new Error('Failed to verify, try again!');
@@ -73,7 +76,7 @@ export const useVerification = () => {
     } catch (err: any) {
       setError(err.message);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   });
 

@@ -6,8 +6,8 @@ export const tokenKeys = {
   refreshToken: 'refreshToken',
 };
 
-export const setVerificationToken = (token: string) => {
-  localStorage.setItem(tokenKeys.verificationToken, token);
+export const setVerificationToken = (token: string | undefined) => {
+  if (token) localStorage.setItem(tokenKeys.verificationToken, token);
 };
 
 export const getVerificationToken = () => {
@@ -25,4 +25,12 @@ export const decodeVerificationToken = () => {
 
 export const removeVerificationToken = () => {
   localStorage.removeItem(tokenKeys.verificationToken);
+};
+
+export const setAccessToken = (token: string | undefined) => {
+  if (token) localStorage.setItem(tokenKeys.accessToken, token);
+};
+
+export const setRefreshToken = (token: string | undefined) => {
+  if (token) localStorage.setItem(tokenKeys.refreshToken, token);
 };
