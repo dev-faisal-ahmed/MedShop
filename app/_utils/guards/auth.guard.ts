@@ -15,4 +15,6 @@ export const authGuard = async (...requiredRoles: TUserRole[]) => {
 
   const { role } = decodedUser;
   if (!requiredRoles.includes(role)) redirect('/login');
+
+  return decodedUser as TLoggedUser;
 };
