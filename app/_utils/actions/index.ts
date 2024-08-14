@@ -1,4 +1,3 @@
-export * from './get.new.access.token.action';
 export * from './get.user.info.action';
 export * from './get.verification.token.action';
 export * from './login.action';

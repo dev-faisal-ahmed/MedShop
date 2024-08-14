@@ -5,22 +5,16 @@ import { Input } from '@/components/shared/form/input';
 import { Select } from '@/components/shared/form/select';
 import { Modal } from '@/components/shared/modal';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-
-const options = [
-  { value: 'PRIMARY', text: 'Primary' },
-  { value: 'SECONDARY', text: 'Secondary' },
-  { value: 'TERTIARY', text: 'Tertiary' },
-];
+import { useAddCategory } from './use.add.category';
 
 export function AddCategory() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [images, setImages] = useState<File[] | null>(null);
-  const [selectedOption, setSelectedOption] = useState<string>();
+  const { states, handlers, constants, apiData } = useAddCategory();
+  const { images, isOpen, type } = states;
+  const { setImages, onClose, onOpen, onTypeChange } = handlers;
+  const { categoryTypesOptions } = constants;
+  const { categories } = apiData;
 
-  const onOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
-  const onOptionSelection = (value: string) => setSelectedOption(value);
+  console.log({ categories });
 
   return (
     <div>
@@ -28,10 +22,10 @@ export function AddCategory() {
       <Modal isOpen={isOpen} onClose={onClose} title='Add Category Details'>
         <form className='flex flex-col gap-3'>
           <Select
-            options={['PRIMARY', 'SECONDARY', 'TERTIARY']}
+            options={categoryTypesOptions}
             label='Type'
             placeholder='Select Any Category Type'
-            onOptionSelect={onOptionSelection}
+            onOptionSelect={onTypeChange}
           />
           <Input label='Name' placeholder='Input Category Name' />
           <Input label='Slug' placeholder='Input Slug' />

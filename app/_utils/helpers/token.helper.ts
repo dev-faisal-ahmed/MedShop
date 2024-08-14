@@ -26,17 +26,3 @@ export const decodeVerificationToken = () => {
 export const removeVerificationToken = () => {
   localStorage.removeItem(tokenKeys.verificationToken);
 };
-
-export const setAccessToken = (token: string | undefined) => {
-  if (token) localStorage.setItem(tokenKeys.accessToken, token);
-};
-
-export const getAccessToken = () => {
-  if (typeof window === 'undefined') return null;
-  const token = localStorage.getItem(tokenKeys.accessToken);
-  return token;
-};
-
-export const setRefreshToken = (token: string | undefined) => {
-  if (token) localStorage.setItem(tokenKeys.refreshToken, token);
-};

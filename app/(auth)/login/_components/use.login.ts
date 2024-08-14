@@ -1,7 +1,6 @@
 'use client';
 
 import { loginAction } from '@/app/_utils/actions';
-import { setAccessToken, setRefreshToken } from '@/app/_utils/helpers';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -41,9 +40,6 @@ export const useLogin = () => {
       const { email, password } = data;
       const response = await loginAction({ email, password });
       if (!response?.ok) throw new Error(response?.message);
-
-      setAccessToken(response?.data?.accessToken);
-      setRefreshToken(response?.data?.refreshToken);
 
       toast.success(response?.message);
       router.push('/');

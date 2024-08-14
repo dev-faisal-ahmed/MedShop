@@ -15,7 +15,7 @@ export const loginAction = async (payload: TPayload) => {
   const responseData = await response.json();
 
   if (responseData?.ok && responseData?.data) {
-    cookies().set(tokenKeys.accessToken, responseData.data.refreshToken);
+    cookies().set(tokenKeys.refreshToken, responseData.data.refreshToken);
     cookies().set(tokenKeys.accessToken, responseData.data.accessToken);
   }
 

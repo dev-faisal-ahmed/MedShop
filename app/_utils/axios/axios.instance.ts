@@ -1,7 +1,8 @@
+import {
+  getAccessTokeAction,
+  getNewAccessTokenAction,
+} from '../actions/auth.actions';
 import axios from 'axios';
-import { getAccessToken, setAccessToken } from '../helpers';
-import { TErrorResponse, TSuccessResponse } from '../types';
-import { getNewAccessTokenAction } from '../actions';
 import { serverAddress } from '@/app/_data';
 
 export const axiosInstance = axios.create({
@@ -11,12 +12,11 @@ export const axiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
-  function (config) {
-    const accessToken = getAccessToken();
+  async function (config) {
+    const accessToken = await getAccessTokeAction();
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
-
     return config;
   },
 
@@ -29,29 +29,33 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   //@ts-ignore
   function (response) {
-    const responseObject: TSuccessResponse = {
+    return {
+      ok: response?.data?.ok,
       data: response?.data?.data,
       meta: response?.data?.meta,
       message: response?.data.message,
     };
-
-    return responseObject;
   },
 
   async function (error) {
     const config = error.config;
-    if (error?.response?.status === 500 && !config.sent) {
+    const errorResponse = error.response?.data;
+    const errorMessage = errorResponse?.message;
+    const status = error.response?.status;
+
+    if (
+      errorMessage === 'Access Token Expired' &&
+      status === 401 &&
+      !config.sent
+    ) {
       config.sent = true;
       const accessToken = await getNewAccessTokenAction();
-      if (accessToken) config.headers['Authorization'] = accessToken;
-      setAccessToken(accessToken);
-      return axiosInstance(config);
+      if (accessToken) {
+        config.headers.Authorization = accessToken;
+        return axiosInstance(config);
+      }
     } else {
-      const responseObject: TErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || 'Something went wrong!!!',
-      };
-      return responseObject;
+      return Promise.reject(error);
     }
   },
 );

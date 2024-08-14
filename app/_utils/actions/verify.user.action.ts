@@ -1,11 +1,12 @@
 'use server';
 
 import { apiUrl } from '@/app/_data';
-import { fetchOption } from '@/app/_utils/helpers';
+import { fetchOption } from '../helpers';
 
-type TPayload = { code: string; verificationToken: string };
+// verify user
+type TVerifyUserPayload = { code: string; verificationToken: string };
 
-export const verifyUserAction = async (payload: TPayload) => {
+export const verifyUserAction = async (payload: TVerifyUserPayload) => {
   const response = await fetch(
     apiUrl.verifyUser,
     fetchOption({ method: 'POST', body: payload }),

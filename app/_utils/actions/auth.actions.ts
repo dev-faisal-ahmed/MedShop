@@ -1,11 +1,14 @@
 'use server';
 
-import { cookies } from 'next/headers';
-import { fetchOption, tokenKeys } from '../helpers';
 import { apiUrl } from '@/app/_data';
+import { fetchOption, tokenKeys } from '@/app/_utils/helpers';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
+// get new access token
 export const getNewAccessTokenAction = async () => {
   const refreshToken = cookies().get(tokenKeys.refreshToken)?.value;
+
   if (!refreshToken) return null;
 
   const response = await fetch(
@@ -17,14 +20,18 @@ export const getNewAccessTokenAction = async () => {
 
   let accessToken;
   if (responseData?.ok) accessToken = responseData.data?.accessToken;
-
   if (accessToken) cookies().set(tokenKeys.accessToken, accessToken);
-  else {
-    // deleting both tokens
+
+  if (!response?.ok) {
     cookies().delete(tokenKeys.accessToken);
     cookies().delete(tokenKeys.refreshToken);
-    return null;
+    redirect('/login');
   }
 
   return accessToken;
+};
+
+export const getAccessTokeAction = async () => {
+  const token = cookies().get(tokenKeys.accessToken)?.value;
+  return token;
 };

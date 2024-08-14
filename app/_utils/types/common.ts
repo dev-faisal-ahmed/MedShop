@@ -34,3 +34,8 @@ export type TLoggedUser = {
   role: TUserRole;
   isVerified: boolean;
 };
+
+export type TSelectOption = {
+  value: string;
+  title: string;
+};
